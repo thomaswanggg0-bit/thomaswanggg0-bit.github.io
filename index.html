@@ -50,6 +50,10 @@
     .card.python .btn-go { background: #4f46e5; color: white; }
     .card.excel  .btn-go { background: #16a34a; color: white; }
     .card.sql    .btn-go { background: #1d4ed8; color: white; }
+    .card.challenge::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+    .card.challenge:hover { border-color: #b45309; }
+    .card.challenge .tag { background: #1c1000; color: #fbbf24; }
+    .card.challenge .btn-go { background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; }
     footer { margin-top: auto; text-align: center; padding: 28px 24px; color: #334155; font-size: 0.8rem; border-top: 1px solid #0f172a; }
     @media (max-width: 600px) { .hero { padding: 50px 20px 40px; } .stats { gap: 24px; } }
   </style>
@@ -135,6 +139,24 @@
       </div>
     </a>
 
+    <a class="card challenge" id="link-challenge" href="#" target="_blank">
+      <div class="card-header">
+        <div class="card-icon">⚡</div>
+        <div>
+          <div class="card-title">Challenge Mode</div>
+          <div class="card-subtitle" data-i18n="ch-sub">20 questions · Chrono · Classement mondial</div>
+        </div>
+      </div>
+      <p class="card-description" data-i18n="ch-desc">Teste-toi avec un mix de questions Python, Excel et SQL en mode compétition. Chrono, score et classement mondial en temps réel !</p>
+      <div class="card-tags">
+        <span class="tag">⏱️ Chrono</span><span class="tag">🏆 Classement</span><span class="tag">🐍 Python</span><span class="tag">📊 Excel</span><span class="tag">🗄️ SQL</span>
+      </div>
+      <div class="card-cta">
+        <span class="card-levels" data-i18n="ch-level">Tous niveaux · Mode compétition</span>
+        <span class="btn-go" data-i18n="ch-start">⚡ Jouer →</span>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -158,6 +180,10 @@ const T = {
     'sql-desc': 'Écris de vraies requêtes SQL dans le navigateur. SELECT, JOIN, GROUP BY, sous-requêtes, CTE et CASE WHEN.',
     'levels-3': 'Débutant · Intermédiaire · Avancé',
     'levels-4': 'Débutant · Intermédiaire · Avancé · Expert',
+    'ch-sub': '20 questions · Chrono · Classement mondial',
+    'ch-desc': 'Teste-toi avec un mix de questions Python, Excel et SQL en mode compétition. Chrono, score et classement mondial en temps réel !',
+    'ch-level': 'Tous niveaux · Mode compétition',
+    'ch-start': '⚡ Jouer →',
     start: 'Commencer →',
     footer: 'Fait avec ❤️ · Exercices interactifs & gratuits'
   },
@@ -175,6 +201,10 @@ const T = {
     'sql-desc': 'Write real SQL queries in your browser. SELECT, JOIN, GROUP BY, subqueries, CTEs and CASE WHEN.',
     'levels-3': 'Beginner · Intermediate · Advanced',
     'levels-4': 'Beginner · Intermediate · Advanced · Expert',
+    'ch-sub': '20 questions · Timer · Global leaderboard',
+    'ch-desc': 'Test yourself with a mix of Python, Excel and SQL questions in competition mode. Timer, score and real-time global leaderboard!',
+    'ch-level': 'All levels · Competition mode',
+    'ch-start': '⚡ Play →',
     start: 'Start →',
     footer: 'Made with ❤️ · Free interactive exercises'
   }
@@ -200,7 +230,8 @@ if (parts.length >= 3 && parts[1]==='github' && parts[2]==='io') {
   const pseudo = parts[0];
   document.getElementById('link-python').href = `https://${pseudo}.github.io/python-trainer`;
   document.getElementById('link-excel').href  = `https://${pseudo}.github.io/excel-trainer`;
-  document.getElementById('link-sql').href    = `https://${pseudo}.github.io/sql-trainer`;
+  document.getElementById('link-sql').href       = `https://${pseudo}.github.io/sql-trainer`;
+  document.getElementById('link-challenge').href = `https://${pseudo}.github.io/challenge`;
 }
 
 setLang(lang);
