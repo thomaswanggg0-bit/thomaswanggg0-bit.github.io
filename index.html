@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mes Trainers — Apprends en pratiquant</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0a14;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0a14 70%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #1e1b4b;
+      border: 1px solid #3730a3;
+      color: #a5b4fc;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #ffffff, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 520px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .stat { text-align: center; }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: #fff; }
+    .stat-label { font-size: 0.78rem; color: #64748b; margin-top: 2px; }
+
+    /* Cards */
+    .cards-section {
+      padding: 60px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #475569;
+      margin-bottom: 32px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #0f0f1e;
+      border: 1px solid #1e1b4b;
+      border-radius: 16px;
+      padding: 32px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .card.python::before { background: linear-gradient(90deg, #4f46e5, #7c3aed); }
+    .card.excel::before  { background: linear-gradient(90deg, #16a34a, #4ade80); }
+
+    .card:hover {
+      border-color: #3730a3;
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card.excel:hover { border-color: #166534; }
+
+    .card-icon {
+      font-size: 2.8rem;
+      line-height: 1;
+    }
+
+    .card-header { display: flex; align-items: center; gap: 16px; }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .card-subtitle { font-size: 0.82rem; color: #64748b; }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.65;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .card.python .tag { background: #1e1b4b; color: #a5b4fc; }
+    .card.excel .tag  { background: #14532d; color: #86efac; }
+
+    .card-cta {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid #1e293b;
+    }
+
+    .card-levels { font-size: 0.78rem; color: #475569; }
+
+    .btn-go {
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .card.python .btn-go { background: #4f46e5; color: white; }
+    .card.python .btn-go:hover { background: #6366f1; }
+    .card.excel .btn-go  { background: #16a34a; color: white; }
+    .card.excel .btn-go:hover { background: #15803d; }
+
+    /* Coming soon card */
+    .card.soon {
+      opacity: 0.5;
+      pointer-events: none;
+      border-style: dashed;
+    }
+    .card.soon::before { background: #334155; }
+    .soon-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: #1e293b;
+      color: #64748b;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 32px 24px;
+      color: #334155;
+      font-size: 0.8rem;
+      border-top: 1px solid #0f172a;
+    }
+
+    footer a { color: #475569; text-decoration: none; }
+    footer a:hover { color: #94a3b8; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 50px 20px 40px; }
+      .stats { gap: 24px; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-badge">🎓 Apprends en pratiquant</div>
+  <h1>Progresse sur les outils<br>essentiels du numérique</h1>
+  <p>Des exercices interactifs, progressifs et gratuits pour maîtriser Python et Excel — directement dans ton navigateur, sans installation.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">22</div>
+      <div class="stat-label">Exercices</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Niveaux</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Gratuit</div>
+    </div>
+  </div>
+</section>
+
+<section class="cards-section">
+  <div class="section-label">Choisir un trainer</div>
+
+  <div class="cards">
+
+    <!-- Python -->
+    <a class="card python" id="link-python" href="#" target="_blank">
+      <div class="card-header">
+        <div class="card-icon">🐍</div>
+        <div>
+          <div class="card-title">Python Trainer</div>
+          <div class="card-subtitle">8 exercices · Débutant → Avancé</div>
+        </div>
+      </div>
+      <p class="card-description">
+        Apprends Python en codant directement dans le navigateur. Fonctions, listes, dictionnaires, classes et récursivité.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Fonctions</span>
+        <span class="tag">Listes</span>
+        <span class="tag">Dictionnaires</span>
+        <span class="tag">POO</span>
+        <span class="tag">Récursivité</span>
+      </div>
+      <div class="card-cta">
+        <span class="card-levels">Débutant · Intermédiaire · Avancé</span>
+        <span class="btn-go">Commencer →</span>
+      </div>
+    </a>
+
+    <!-- Excel -->
+    <a class="card excel" id="link-excel" href="#" target="_blank">
+      <div class="card-header">
+        <div class="card-icon">📊</div>
+        <div>
+          <div class="card-title">Excel Trainer</div>
+          <div class="card-subtitle">14 exercices · Débutant → Expert</div>
+        </div>
+      </div>
+      <p class="card-description">
+        Maîtrise les formules Excel essentielles : SUM, IF, VLOOKUP, INDEX/MATCH, SUMPRODUCT et bien plus encore.
+      </p>
+      <div class="card-tags">
+        <span class="tag">SUM / IF</span>
+        <span class="tag">VLOOKUP</span>
+        <span class="tag">INDEX/MATCH</span>
+        <span class="tag">XLOOKUP</span>
+        <span class="tag">TCD</span>
+      </div>
+      <div class="card-cta">
+        <span class="card-levels">Débutant · Intermédiaire · Avancé · Expert</span>
+        <span class="btn-go">Commencer →</span>
+      </div>
+    </a>
+
+    <!-- Coming soon -->
+    <div class="card soon">
+      <div class="soon-badge">Bientôt</div>
+      <div class="card-header">
+        <div class="card-icon">🗄️</div>
+        <div>
+          <div class="card-title">SQL Trainer</div>
+          <div class="card-subtitle">À venir</div>
+        </div>
+      </div>
+      <p class="card-description">
+        SELECT, JOIN, GROUP BY, sous-requêtes... Apprends à interroger des bases de données.
+      </p>
+      <div class="card-cta">
+        <span class="card-levels">En préparation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Fait avec ❤️ · Exercices interactifs &amp; gratuits ·
+  <a href="https://github.com" target="_blank">GitHub</a>
+</footer>
+
+<script>
+  // Détecte automatiquement le pseudo GitHub depuis l'URL
+  const host = window.location.hostname; // ex: monpseudo.github.io
+  const parts = host.split('.');
+  if (parts.length >= 3 && parts[1] === 'github' && parts[2] === 'io') {
+    const pseudo = parts[0];
+    document.getElementById('link-python').href = `https://${pseudo}.github.io/python-trainer`;
+    document.getElementById('link-excel').href  = `https://${pseudo}.github.io/excel-trainer`;
+  }
+</script>
+
+</body>
+</html>
