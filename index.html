@@ -56,6 +56,35 @@
     .card.challenge .btn-go { background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; }
     footer { margin-top: auto; text-align: center; padding: 28px 24px; color: #334155; font-size: 0.8rem; border-top: 1px solid #0f172a; }
     @media (max-width: 600px) { .hero { padding: 50px 20px 40px; } .stats { gap: 24px; } }
+    .theme-btn { padding: 7px 10px; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; font-size: 1rem; margin-left: 8px; }
+    .theme-btn:hover { background: rgba(255,255,255,0.1); }
+    .card.js::before     { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .card.js:hover       { border-color: #b45309; }
+    .card.js .tag        { background: #1c1000; color: #fbbf24; }
+    .card.js .btn-go     { background: #f59e0b; color: #1c1000; }
+    .card.htmlcss::before { background: linear-gradient(90deg, #f97316, #fb923c); }
+    .card.htmlcss:hover   { border-color: #c2410c; }
+    .card.htmlcss .tag    { background: #1c0a00; color: #fb923c; }
+    .card.htmlcss .btn-go { background: #f97316; color: white; }
+    body.light { background: #f8fafc; color: #1e293b; }
+    body.light header { background: linear-gradient(135deg, #4338ca, #6366f1) !important; }
+    body.light .hero { background: radial-gradient(ellipse at top, #e0e7ff 0%, #f8fafc 70%); }
+    body.light .hero p { color: #475569; }
+    body.light .hero-badge { background: #e0e7ff; border-color: #6366f1; color: #4338ca; }
+    body.light .stat-label { color: #64748b; }
+    body.light .stat-number { color: #1e293b; }
+    body.light .section-label { color: #94a3b8; }
+    body.light .card { background: #ffffff; border-color: #e2e8f0; }
+    body.light .card-description { color: #475569; }
+    body.light .card-levels { color: #64748b; }
+    body.light .card-cta { border-top-color: #e2e8f0; }
+    body.light footer { color: #94a3b8; border-top-color: #e2e8f0; }
+    body.light .lang-toggle { background: #e2e8f0; border-color: #c7d2fe; }
+    body.light .lang-btn { color: #64748b; }
+    body.light .lang-btn.active { background: #6366f1; color: white; }
+    body.light .theme-btn { border-color: rgba(0,0,0,0.2); }
+    body.light .card.js .tag { background: #fef3c7; color: #b45309; }
+    body.light .card.htmlcss .tag { background: #ffedd5; color: #c2410c; }
   </style>
 </head>
 <body>
@@ -64,9 +93,12 @@
   <div class="header-left">
     <div class="logo">🎓 <span>Trainers</span></div>
   </div>
-  <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('fr')">🇫🇷 FR</button>
-    <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('fr')">🇫🇷 FR</button>
+      <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+    </div>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
   </div>
 </header>
 
@@ -75,7 +107,7 @@
   <h1 data-i18n="title">Progresse sur les outils<br>essentiels du numérique</h1>
   <p data-i18n="subtitle">Des exercices interactifs, progressifs et gratuits pour maîtriser Python, Excel et SQL — directement dans ton navigateur, sans installation.</p>
   <div class="stats">
-    <div class="stat"><div class="stat-number">39</div><div class="stat-label" data-i18n="stat1">Exercices</div></div>
+    <div class="stat"><div class="stat-number">61</div><div class="stat-label" data-i18n="stat1">Exercices</div></div>
     <div class="stat"><div class="stat-number">4</div><div class="stat-label" data-i18n="stat2">Niveaux</div></div>
     <div class="stat"><div class="stat-number">100%</div><div class="stat-label" data-i18n="stat3">Gratuit</div></div>
   </div>
@@ -139,6 +171,42 @@
       </div>
     </a>
 
+    <a class="card js" id="link-js" href="#" target="_blank">
+      <div class="card-header">
+        <div class="card-icon">⚙️</div>
+        <div>
+          <div class="card-title">JavaScript Trainer</div>
+          <div class="card-subtitle" data-i18n="js-sub">10 exercices · Débutant → Avancé</div>
+        </div>
+      </div>
+      <p class="card-description" data-i18n="js-desc">Maîtrise JavaScript : variables, fonctions, tableaux, classes et bien plus avec exécution en temps réel.</p>
+      <div class="card-tags">
+        <span class="tag">Variables</span><span class="tag">Functions</span><span class="tag">Arrays</span><span class="tag">Classes</span><span class="tag">ES6</span>
+      </div>
+      <div class="card-cta">
+        <span class="card-levels" data-i18n="levels-3">Débutant · Intermédiaire · Avancé</span>
+        <span class="btn-go" data-i18n="start">Commencer →</span>
+      </div>
+    </a>
+
+    <a class="card htmlcss" id="link-htmlcss" href="#" target="_blank">
+      <div class="card-header">
+        <div class="card-icon">🎨</div>
+        <div>
+          <div class="card-title">HTML/CSS Trainer</div>
+          <div class="card-subtitle" data-i18n="htmlcss-sub">12 exercices · Débutant → Avancé</div>
+        </div>
+      </div>
+      <p class="card-description" data-i18n="htmlcss-desc">Apprends à créer des pages web avec un éditeur en direct. Titres, liens, flexbox, grid et animations CSS.</p>
+      <div class="card-tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Flexbox</span><span class="tag">Grid</span><span class="tag">Responsive</span>
+      </div>
+      <div class="card-cta">
+        <span class="card-levels" data-i18n="levels-3">Débutant · Intermédiaire · Avancé</span>
+        <span class="btn-go" data-i18n="start">Commencer →</span>
+      </div>
+    </a>
+
     <a class="card challenge" id="link-challenge" href="#" target="_blank">
       <div class="card-header">
         <div class="card-icon">⚡</div>
@@ -180,6 +248,10 @@ const T = {
     'sql-desc': 'Écris de vraies requêtes SQL dans le navigateur. SELECT, JOIN, GROUP BY, sous-requêtes, CTE et CASE WHEN.',
     'levels-3': 'Débutant · Intermédiaire · Avancé',
     'levels-4': 'Débutant · Intermédiaire · Avancé · Expert',
+    'js-sub': '10 exercices · Débutant → Avancé',
+    'js-desc': 'Maîtrise JavaScript : variables, fonctions, tableaux, classes et bien plus avec exécution en temps réel.',
+    'htmlcss-sub': '12 exercices · Débutant → Avancé',
+    'htmlcss-desc': 'Apprends à créer des pages web avec un éditeur en direct. Titres, liens, flexbox, grid et animations CSS.',
     'ch-sub': '20 questions · Chrono · Classement mondial',
     'ch-desc': 'Teste-toi avec un mix de questions Python, Excel et SQL en mode compétition. Chrono, score et classement mondial en temps réel !',
     'ch-level': 'Tous niveaux · Mode compétition',
@@ -201,6 +273,10 @@ const T = {
     'sql-desc': 'Write real SQL queries in your browser. SELECT, JOIN, GROUP BY, subqueries, CTEs and CASE WHEN.',
     'levels-3': 'Beginner · Intermediate · Advanced',
     'levels-4': 'Beginner · Intermediate · Advanced · Expert',
+    'js-sub': '10 exercises · Beginner → Advanced',
+    'js-desc': 'Master JavaScript: variables, functions, arrays, classes and more with real-time execution.',
+    'htmlcss-sub': '12 exercises · Beginner → Advanced',
+    'htmlcss-desc': 'Learn to build web pages with a live editor. Headings, links, flexbox, grid and CSS animations.',
     'ch-sub': '20 questions · Timer · Global leaderboard',
     'ch-desc': 'Test yourself with a mix of Python, Excel and SQL questions in competition mode. Timer, score and real-time global leaderboard!',
     'ch-level': 'All levels · Competition mode',
@@ -232,9 +308,22 @@ if (parts.length >= 3 && parts[1]==='github' && parts[2]==='io') {
   document.getElementById('link-excel').href  = `https://${pseudo}.github.io/excel-trainer`;
   document.getElementById('link-sql').href       = `https://${pseudo}.github.io/sql-trainer`;
   document.getElementById('link-challenge').href = `https://${pseudo}.github.io/challenge`;
+  document.getElementById('link-js').href      = `https://${pseudo}.github.io/js-trainer`;
+  document.getElementById('link-htmlcss').href = `https://${pseudo}.github.io/html-css-trainer`;
 }
 
 setLang(lang);
+
+let theme = localStorage.getItem('theme') || 'dark';
+function applyTheme(t) {
+  theme = t;
+  localStorage.setItem('theme', t);
+  document.body.classList.toggle('light', t === 'light');
+  const btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = t === 'light' ? '🌙' : '☀️';
+}
+function toggleTheme() { applyTheme(theme === 'dark' ? 'light' : 'dark'); }
+applyTheme(theme);
 </script>
 </body>
 </html>
