@@ -3,334 +3,135 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mes Trainers — Apprends en pratiquant</title>
+  <title>Trainers — Learn by doing</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a0a14;
-      color: #e2e8f0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 80px 24px 60px;
-      background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0a14 70%);
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: #1e1b4b;
-      border: 1px solid #3730a3;
-      color: #a5b4fc;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 6px 16px;
-      border-radius: 999px;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 18px;
-      background: linear-gradient(135deg, #ffffff, #a5b4fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: #94a3b8;
-      max-width: 520px;
-      margin: 0 auto 48px;
-      line-height: 1.7;
-    }
-
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a14; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; }
+    header { background: linear-gradient(135deg, #1e1b4b, #312e81); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #3730a3; }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .logo { font-size: 1.6rem; font-weight: 800; }
+    .logo span { color: #a5b4fc; }
+    .lang-toggle { display: flex; background: #13132a; border: 1px solid #3730a3; border-radius: 8px; overflow: hidden; }
+    .lang-btn { padding: 7px 14px; font-size: 0.82rem; font-weight: 700; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.2s; }
+    .lang-btn.active { background: #4f46e5; color: white; }
+    .hero { text-align: center; padding: 80px 24px 60px; background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0a14 70%); }
+    .hero-badge { display: inline-block; background: #1e1b4b; border: 1px solid #3730a3; color: #a5b4fc; font-size: 0.78rem; font-weight: 600; padding: 6px 16px; border-radius: 999px; letter-spacing: 0.05em; margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 18px; background: linear-gradient(135deg, #ffffff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 1.05rem; color: #94a3b8; max-width: 540px; margin: 0 auto 48px; line-height: 1.7; }
+    .stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
     .stat { text-align: center; }
     .stat-number { font-size: 1.8rem; font-weight: 800; color: #fff; }
     .stat-label { font-size: 0.78rem; color: #64748b; margin-top: 2px; }
-
-    /* Cards */
-    .cards-section {
-      padding: 60px 24px;
-      max-width: 900px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .section-label {
-      text-align: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #475569;
-      margin-bottom: 32px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: #0f0f1e;
-      border: 1px solid #1e1b4b;
-      border-radius: 16px;
-      padding: 32px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: 16px 16px 0 0;
-    }
-
+    .cards-section { padding: 60px 24px; max-width: 960px; margin: 0 auto; width: 100%; }
+    .section-label { text-align: center; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #475569; margin-bottom: 32px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .card { background: #0f0f1e; border: 1px solid #1e1b4b; border-radius: 16px; padding: 28px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 14px; transition: all 0.25s; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 16px 16px 0 0; }
     .card.python::before { background: linear-gradient(90deg, #4f46e5, #7c3aed); }
     .card.excel::before  { background: linear-gradient(90deg, #16a34a, #4ade80); }
-
-    .card:hover {
-      border-color: #3730a3;
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .card.excel:hover { border-color: #166534; }
-
-    .card-icon {
-      font-size: 2.8rem;
-      line-height: 1;
-    }
-
-    .card-header { display: flex; align-items: center; gap: 16px; }
-
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .card-subtitle { font-size: 0.82rem; color: #64748b; }
-
-    .card-description {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      line-height: 1.65;
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tag {
-      font-size: 0.72rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-weight: 600;
-    }
-
+    .card.sql::before    { background: linear-gradient(90deg, #1d4ed8, #60a5fa); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .card.python:hover { border-color: #3730a3; }
+    .card.excel:hover  { border-color: #166534; }
+    .card.sql:hover    { border-color: #1d4ed8; }
+    .card-header { display: flex; align-items: center; gap: 14px; }
+    .card-icon { font-size: 2.4rem; line-height: 1; }
+    .card-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 3px; }
+    .card-subtitle { font-size: 0.8rem; color: #64748b; }
+    .card-description { font-size: 0.88rem; color: #94a3b8; line-height: 1.65; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { font-size: 0.7rem; padding: 3px 9px; border-radius: 999px; font-weight: 600; }
     .card.python .tag { background: #1e1b4b; color: #a5b4fc; }
     .card.excel .tag  { background: #14532d; color: #86efac; }
-
-    .card-cta {
-      margin-top: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 16px;
-      border-top: 1px solid #1e293b;
-    }
-
-    .card-levels { font-size: 0.78rem; color: #475569; }
-
-    .btn-go {
-      padding: 9px 20px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-
+    .card.sql .tag    { background: #0c1a3a; color: #93c5fd; }
+    .card-cta { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid #1e293b; }
+    .card-levels { font-size: 0.75rem; color: #475569; }
+    .btn-go { padding: 8px 18px; border-radius: 8px; font-size: 0.83rem; font-weight: 700; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
     .card.python .btn-go { background: #4f46e5; color: white; }
-    .card.python .btn-go:hover { background: #6366f1; }
-    .card.excel .btn-go  { background: #16a34a; color: white; }
-    .card.excel .btn-go:hover { background: #15803d; }
-    .card.sql::before  { background: linear-gradient(90deg, #1d4ed8, #60a5fa); }
-    .card.sql:hover { border-color: #1d4ed8; }
-    .card.sql .tag { background: #0c1a3a; color: #93c5fd; }
-    .card.sql .btn-go { background: #1d4ed8; color: white; }
-    .card.sql .btn-go:hover { background: #2563eb; }
-
-    /* Coming soon card */
-    .card.soon {
-      opacity: 0.5;
-      pointer-events: none;
-      border-style: dashed;
-    }
-    .card.soon::before { background: #334155; }
-    .soon-badge {
-      position: absolute;
-      top: 16px; right: 16px;
-      background: #1e293b;
-      color: #64748b;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: auto;
-      text-align: center;
-      padding: 32px 24px;
-      color: #334155;
-      font-size: 0.8rem;
-      border-top: 1px solid #0f172a;
-    }
-
-    footer a { color: #475569; text-decoration: none; }
-    footer a:hover { color: #94a3b8; }
-
-    @media (max-width: 600px) {
-      .hero { padding: 50px 20px 40px; }
-      .stats { gap: 24px; }
-      .cards { grid-template-columns: 1fr; }
-    }
+    .card.excel  .btn-go { background: #16a34a; color: white; }
+    .card.sql    .btn-go { background: #1d4ed8; color: white; }
+    footer { margin-top: auto; text-align: center; padding: 28px 24px; color: #334155; font-size: 0.8rem; border-top: 1px solid #0f172a; }
+    @media (max-width: 600px) { .hero { padding: 50px 20px 40px; } .stats { gap: 24px; } }
   </style>
 </head>
 <body>
 
-<section class="hero">
-  <div class="hero-badge">🎓 Apprends en pratiquant</div>
-  <h1>Progresse sur les outils<br>essentiels du numérique</h1>
-  <p>Des exercices interactifs, progressifs et gratuits pour maîtriser Python et Excel — directement dans ton navigateur, sans installation.</p>
+<header>
+  <div class="header-left">
+    <div class="logo">🎓 <span>Trainers</span></div>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr')">🇫🇷 FR</button>
+    <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+  </div>
+</header>
 
+<section class="hero">
+  <div class="hero-badge" data-i18n="badge">🎓 Apprends en pratiquant</div>
+  <h1 data-i18n="title">Progresse sur les outils<br>essentiels du numérique</h1>
+  <p data-i18n="subtitle">Des exercices interactifs, progressifs et gratuits pour maîtriser Python, Excel et SQL — directement dans ton navigateur, sans installation.</p>
   <div class="stats">
-    <div class="stat">
-      <div class="stat-number">39</div>
-      <div class="stat-label">Exercices</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">4</div>
-      <div class="stat-label">Niveaux</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Gratuit</div>
-    </div>
+    <div class="stat"><div class="stat-number">39</div><div class="stat-label" data-i18n="stat1">Exercices</div></div>
+    <div class="stat"><div class="stat-number">4</div><div class="stat-label" data-i18n="stat2">Niveaux</div></div>
+    <div class="stat"><div class="stat-number">100%</div><div class="stat-label" data-i18n="stat3">Gratuit</div></div>
   </div>
 </section>
 
 <section class="cards-section">
-  <div class="section-label">Choisir un trainer</div>
-
+  <div class="section-label" data-i18n="choose">Choisir un trainer</div>
   <div class="cards">
 
-    <!-- Python -->
     <a class="card python" id="link-python" href="#" target="_blank">
       <div class="card-header">
         <div class="card-icon">🐍</div>
         <div>
           <div class="card-title">Python Trainer</div>
-          <div class="card-subtitle">8 exercices · Débutant → Avancé</div>
+          <div class="card-subtitle" data-i18n="py-sub">8 exercices · Débutant → Avancé</div>
         </div>
       </div>
-      <p class="card-description">
-        Apprends Python en codant directement dans le navigateur. Fonctions, listes, dictionnaires, classes et récursivité.
-      </p>
+      <p class="card-description" data-i18n="py-desc">Apprends Python en codant directement dans le navigateur. Fonctions, listes, dictionnaires, classes et récursivité.</p>
       <div class="card-tags">
-        <span class="tag">Fonctions</span>
-        <span class="tag">Listes</span>
-        <span class="tag">Dictionnaires</span>
-        <span class="tag">POO</span>
-        <span class="tag">Récursivité</span>
+        <span class="tag">Functions</span><span class="tag">Lists</span><span class="tag">Dict</span><span class="tag">OOP</span><span class="tag">Recursion</span>
       </div>
       <div class="card-cta">
-        <span class="card-levels">Débutant · Intermédiaire · Avancé</span>
-        <span class="btn-go">Commencer →</span>
+        <span class="card-levels" data-i18n="levels-3">Débutant · Intermédiaire · Avancé</span>
+        <span class="btn-go" data-i18n="start">Commencer →</span>
       </div>
     </a>
 
-    <!-- Excel -->
     <a class="card excel" id="link-excel" href="#" target="_blank">
       <div class="card-header">
         <div class="card-icon">📊</div>
         <div>
           <div class="card-title">Excel Trainer</div>
-          <div class="card-subtitle">14 exercices · Débutant → Expert</div>
+          <div class="card-subtitle" data-i18n="xl-sub">14 exercices · Débutant → Expert</div>
         </div>
       </div>
-      <p class="card-description">
-        Maîtrise les formules Excel essentielles : SUM, IF, VLOOKUP, INDEX/MATCH, SUMPRODUCT et bien plus encore.
-      </p>
+      <p class="card-description" data-i18n="xl-desc">Maîtrise les formules Excel essentielles : SUM, IF, VLOOKUP, INDEX/MATCH, SUMPRODUCT et bien plus encore.</p>
       <div class="card-tags">
-        <span class="tag">SUM / IF</span>
-        <span class="tag">VLOOKUP</span>
-        <span class="tag">INDEX/MATCH</span>
-        <span class="tag">XLOOKUP</span>
-        <span class="tag">TCD</span>
+        <span class="tag">SUM / IF</span><span class="tag">VLOOKUP</span><span class="tag">INDEX/MATCH</span><span class="tag">XLOOKUP</span><span class="tag">TCD</span>
       </div>
       <div class="card-cta">
-        <span class="card-levels">Débutant · Intermédiaire · Avancé · Expert</span>
-        <span class="btn-go">Commencer →</span>
+        <span class="card-levels" data-i18n="levels-4">Débutant · Intermédiaire · Avancé · Expert</span>
+        <span class="btn-go" data-i18n="start">Commencer →</span>
       </div>
     </a>
 
-    <!-- SQL -->
     <a class="card sql" id="link-sql" href="#" target="_blank">
       <div class="card-header">
         <div class="card-icon">🗄️</div>
         <div>
           <div class="card-title">SQL Trainer</div>
-          <div class="card-subtitle">17 exercices · Débutant → Expert</div>
+          <div class="card-subtitle" data-i18n="sql-sub">17 exercices · Débutant → Expert</div>
         </div>
       </div>
-      <p class="card-description">
-        Écris de vraies requêtes SQL dans le navigateur. SELECT, JOIN, GROUP BY, sous-requêtes, CTE et CASE WHEN.
-      </p>
+      <p class="card-description" data-i18n="sql-desc">Écris de vraies requêtes SQL dans le navigateur. SELECT, JOIN, GROUP BY, sous-requêtes, CTE et CASE WHEN.</p>
       <div class="card-tags">
-        <span class="tag">SELECT / WHERE</span>
-        <span class="tag">JOIN</span>
-        <span class="tag">GROUP BY</span>
-        <span class="tag">Sous-requêtes</span>
-        <span class="tag">CTE</span>
+        <span class="tag">SELECT</span><span class="tag">JOIN</span><span class="tag">GROUP BY</span><span class="tag">Subqueries</span><span class="tag">CTE</span>
       </div>
       <div class="card-cta">
-        <span class="card-levels">Débutant · Intermédiaire · Avancé · Expert</span>
-        <span class="btn-go">Commencer →</span>
+        <span class="card-levels" data-i18n="levels-4">Débutant · Intermédiaire · Avancé · Expert</span>
+        <span class="btn-go" data-i18n="start">Commencer →</span>
       </div>
     </a>
 
@@ -338,21 +139,71 @@
 </section>
 
 <footer>
-  Fait avec ❤️ · Exercices interactifs &amp; gratuits ·
-  <a href="https://github.com" target="_blank">GitHub</a>
+  <span data-i18n="footer">Fait avec ❤️ · Exercices interactifs &amp; gratuits</span>
 </footer>
 
 <script>
-  // Détecte automatiquement le pseudo GitHub depuis l'URL
-  const host = window.location.hostname; // ex: monpseudo.github.io
-  const parts = host.split('.');
-  if (parts.length >= 3 && parts[1] === 'github' && parts[2] === 'io') {
-    const pseudo = parts[0];
-    document.getElementById('link-python').href = `https://${pseudo}.github.io/python-trainer`;
-    document.getElementById('link-excel').href  = `https://${pseudo}.github.io/excel-trainer`;
-    document.getElementById('link-sql').href    = `https://${pseudo}.github.io/sql-trainer`;
+const T = {
+  fr: {
+    badge: '🎓 Apprends en pratiquant',
+    title: 'Progresse sur les outils<br>essentiels du numérique',
+    subtitle: 'Des exercices interactifs, progressifs et gratuits pour maîtriser Python, Excel et SQL — directement dans ton navigateur, sans installation.',
+    stat1: 'Exercices', stat2: 'Niveaux', stat3: 'Gratuit',
+    choose: 'Choisir un trainer',
+    'py-sub': '8 exercices · Débutant → Avancé',
+    'py-desc': 'Apprends Python en codant directement dans le navigateur. Fonctions, listes, dictionnaires, classes et récursivité.',
+    'xl-sub': '14 exercices · Débutant → Expert',
+    'xl-desc': 'Maîtrise les formules Excel essentielles : SUM, IF, VLOOKUP, INDEX/MATCH, SUMPRODUCT et bien plus encore.',
+    'sql-sub': '17 exercices · Débutant → Expert',
+    'sql-desc': 'Écris de vraies requêtes SQL dans le navigateur. SELECT, JOIN, GROUP BY, sous-requêtes, CTE et CASE WHEN.',
+    'levels-3': 'Débutant · Intermédiaire · Avancé',
+    'levels-4': 'Débutant · Intermédiaire · Avancé · Expert',
+    start: 'Commencer →',
+    footer: 'Fait avec ❤️ · Exercices interactifs & gratuits'
+  },
+  en: {
+    badge: '🎓 Learn by doing',
+    title: 'Master the essential<br>digital tools',
+    subtitle: 'Free, interactive, step-by-step exercises to master Python, Excel and SQL — right in your browser, no installation needed.',
+    stat1: 'Exercises', stat2: 'Levels', stat3: 'Free',
+    choose: 'Choose a trainer',
+    'py-sub': '8 exercises · Beginner → Advanced',
+    'py-desc': 'Learn Python by coding directly in your browser. Functions, lists, dictionaries, classes and recursion.',
+    'xl-sub': '14 exercises · Beginner → Expert',
+    'xl-desc': 'Master essential Excel formulas: SUM, IF, VLOOKUP, INDEX/MATCH, SUMPRODUCT and much more.',
+    'sql-sub': '17 exercises · Beginner → Expert',
+    'sql-desc': 'Write real SQL queries in your browser. SELECT, JOIN, GROUP BY, subqueries, CTEs and CASE WHEN.',
+    'levels-3': 'Beginner · Intermediate · Advanced',
+    'levels-4': 'Beginner · Intermediate · Advanced · Expert',
+    start: 'Start →',
+    footer: 'Made with ❤️ · Free interactive exercises'
   }
-</script>
+};
 
+let lang = localStorage.getItem('lang') || 'fr';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('.lang-btn').forEach((b, i) => b.classList.toggle('active', (i===0&&l==='fr')||(i===1&&l==='en')));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (T[l][key]) el.innerHTML = T[l][key];
+  });
+  document.documentElement.lang = l;
+}
+
+// Auto-detect GitHub Pages pseudo
+const host = window.location.hostname;
+const parts = host.split('.');
+if (parts.length >= 3 && parts[1]==='github' && parts[2]==='io') {
+  const pseudo = parts[0];
+  document.getElementById('link-python').href = `https://${pseudo}.github.io/python-trainer`;
+  document.getElementById('link-excel').href  = `https://${pseudo}.github.io/excel-trainer`;
+  document.getElementById('link-sql').href    = `https://${pseudo}.github.io/sql-trainer`;
+}
+
+setLang(lang);
+</script>
 </body>
 </html>
